@@ -1,37 +1,29 @@
-# SobrouVendi — Projeto-base para o aluno
+# Meu Site Vendas — Versão Aluno — Filtro de Produtos
 
-## Proposta
-E-commerce educacional com interface pronta, produtos de demonstração, login, painel administrativo e estrutura de API.
+O CRUD de produtos está concluído e não deve ser alterado nesta atividade.
 
-### O que já está pronto
-- Interface completa em React
-- Home, catálogo, produto, carrinho, login e cadastro
-- Painel administrativo
-- Produtos de demonstração
-- Estrutura Express
-- Estrutura MongoDB/Mongoose
-- Seed de produtos e usuários
-- Rotas organizadas
-- Componentes reutilizáveis
+## Implementação atual
 
-### O que o aluno deve implementar
-Os arquivos contêm marcações `TODO - ALUNO`.
+O aluno trabalhará somente em:
 
-1. Persistência real no MongoDB
-2. CRUD completo de produtos
-3. Login/autenticação real
-4. Controle de acesso de administrador
-5. Carrinho persistente
-6. Criação de pedidos
-7. Atualização de estoque
-8. Busca, filtros e paginação
-9. Validações
-10. Tratamento de erros
-11. Testes
-12. Hospedagem
+`frontend/src/App.jsx`
 
-## Tecnologias
-- React + Vite
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT (estrutura preparada)
+Mais especificamente no componente:
+
+`Produtos`
+
+Os únicos comentários didáticos deixados no código são os da implementação atual de **Filtro de Produtos**.
+
+### Etapas do desafio
+
+1. Criar o estado `busca`.
+2. Criar o estado `categoria`.
+3. Criar o estado `ordenacao`.
+4. Criar `produtosFiltrados` com `filter()`.
+5. Criar `produtosExibidos` e ordenar com `sort()`.
+6. Conectar o campo de busca com `value` e `onChange`.
+7. Implementar os botões de categoria.
+8. Implementar o `select` de ordenação.
+9. Renderizar o array final filtrado.
+
+Não é necessário modificar o backend nesta etapa.
