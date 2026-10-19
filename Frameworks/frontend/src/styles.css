@@ -375,3 +375,23 @@ footer{
 }
 .header nav{display:none}
 }
+
+
+.filters button.active{
+    background:#163d2b;
+    color:white;
+    border-color:#163d2b
+}
+.filter-result{
+    margin:-10px 0 20px;
+    color:#758078;
+    font-size:13px
+}
+.empty-result{
+    background:white;
+    border:1px solid #e5e9e5;
+    border-radius:14px;
+    padding:35px;
+    text-align:center;
+    color:#758078
+}
