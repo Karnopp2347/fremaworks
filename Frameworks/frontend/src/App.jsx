@@ -66,56 +66,51 @@ function Home({ produtos }) {
 }
 
 function Produtos({ produtos }) {
-  // DESAFIO — FILTRO DE PRODUTOS
-  // Complete as etapas indicadas abaixo durante a aula.
+  // ============================================================
+  // FILTROS — CONTEÚDO JÁ CONCLUÍDO
+  // ============================================================
+  // As etapas de filtros agora estão implementadas e funcionando.
 
-  // ETAPA 1 — Crie o estado "busca" iniciando com uma string vazia.
-  const[busca, seBusca] = useState;
-
-  // ETAPA 2 — Crie o estado "categoria" iniciando com "Todos".
-  const [categoria, setCategoria] = useState("Todos")
-
-  // ETAPA 3 — Crie o estado "ordenacao" iniciando com uma string vazia.
+  const [busca, setBusca] = useState("");
+  const [categoria, setCategoria] = useState("Todos");
   const [ordenacao, setOrdenacao] = useState("");
-  // ETAPA 4 — Crie "produtosFiltrados" usando produtos.filter().
-  // Regras:
-  // - pesquisar pelo nome OU pela categoria;
-  // - ignorar diferença entre letras maiúsculas e minúsculas;
-  // - se a categoria for "Todos", aceitar qualquer categoria.
-  const produtosFiltrados = produtos.filter((produtos) => {
-    const texoBusca = busca.toLwerCase();
-    
-    const correspondeBusca =
-     produto.nome.toLwerCase().includes(textoBusca) ||
-     (produto.categoria || "").toLweCase().includes(textoBusca);
-    
-   
-   const correspondeCategoria =
-     categoria === "Todos" ||
-     produtos.categoria === categoria;
-   
-  
-  return correspondeBusca && correspondeCategoria;
 
+  const produtosFiltrados = produtos.filter((produto) => {
+    const textoBusca = busca.toLowerCase();
+
+    const correspondeBusca =
+      produto.nome.toLowerCase().includes(textoBusca) ||
+      (produto.categoria || "").toLowerCase().includes(textoBusca);
+
+    const correspondeCategoria =
+      categoria === "Todos" || produto.categoria === categoria;
+
+    return correspondeBusca && correspondeCategoria;
   });
 
-  // ETAPA 5 — Crie "produtosExibidos" a partir de produtosFiltrados.
-  // Use uma cópia do array e sort().
-  // "menor-preco" → menor para maior.
-  // "maior-preco" → maior para menor.
   const produtosExibidos = [...produtosFiltrados].sort((a, b) => {
-  if (ordenacao === "menor-preco") {
-    return a.preco - b.preco;
-  }
+    if (ordenacao === "menor-preco") return a.preco - b.preco;
+    if (ordenacao === "maior-preco") return b.preco - a.preco;
+    return 0;
+  });
 
-  if (ordenacao === "maior-preco") {
-    return b.preco - a.preco;
-  }
+  // ============================================================
+  // PRÓXIMA IMPLEMENTAÇÃO — PAGINAÇÃO
+  // ============================================================
+  // ATIVIDADE DO ALUNO:
+  // Implemente aqui a paginação do catálogo conforme as etapas
+  //
+  // ETAPA 1 — Criar o controle da página atual e definir quantos
+  // produtos serão exibidos por página.
+  //
+  // ETAPA 2 — Calcular os índices necessários e obter somente os
+  // produtos pertencentes à página atual.
+  //
+  // ETAPA 4 — Calcular a quantidade total de páginas.
+  //
+  // ESCREVA A IMPLEMENTAÇÃO ABAIXO:
 
-  return 0;
-});
-{/*Até aqui
-  */}
+
 
   return (
     <section className="section">
@@ -128,33 +123,82 @@ function Produtos({ produtos }) {
         <input
           className="search"
           placeholder="🔎 Buscar produto..."
-          /* ETAPA 6 — Ligue o input ao estado busca usando value e onChange. */
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
         />
       </div>
 
       <div className="filters">
-        {/* ETAPA 7 — Complete os três botões para alterar a categoria. */}
-        <button>Todos</button>
-        <button>Informática</button>
-        <button>Eletrônicos</button>
+        <button
+          onClick={() => setCategoria("Todos")}
+        >
+          Todos
+        </button>
 
-        {/* ETAPA 8 — Ligue o select ao estado ordenacao usando value e onChange. */}
-        <select>
+        <button
+          onClick={() => setCategoria("Informática")}
+        >
+          Informática
+        </button>
+
+        <button
+          onClick={() => setCategoria("Eletrônicos")}
+        >
+          Eletrônicos
+        </button>
+
+        <select
+          value={ordenacao}
+          onChange={(e) => setOrdenacao(e.target.value)}
+        >
           <option value="">Ordenar por</option>
           <option value="menor-preco">Menor preço</option>
           <option value="maior-preco">Maior preço</option>
         </select>
       </div>
 
+      {/*
+        ETAPA 8 — TRATAMENTO DE RESULTADOS
+        Espaço reservado para o aluno implementar a mensagem quando
+        nenhum produto for encontrado.
+      */}
+
       <div className="product-grid">
-        {/* ETAPA 9 — Troque "produtos" pelo array final do filtro. */}
-        {produtos.map((produto) => (
+        {/* FILTROS CONCLUÍDOS — esta é a exibição atual do catálogo. */}
+        {produtosExibidos.map((produto) => (
           <ProductCard
             key={produto._id || produto.id}
             produto={produto}
           />
         ))}
+
+        {/*
+          ETAPA 3 — PAGINAÇÃO
+          O aluno deverá alterar a renderização acima para exibir
+          somente os produtos correspondentes à página atual.
+        */}
       </div>
+
+      {/*
+        ETAPAS 5 e 6 — NAVEGAÇÃO DA PAGINAÇÃO
+        Espaço reservado para implementar:
+        - botão Anterior;
+        - indicação da página atual e total de páginas;
+        - botão Próxima;
+        - bloqueio dos botões nos limites.
+      */}
+
+      {/*
+        ETAPA 7 — INTEGRAÇÃO COM OS FILTROS
+        Ajuste busca, categoria e ordenação para manter a paginação
+        consistente quando os filtros forem alterados.
+      */}
+
+      {/*
+        ETAPA 8 — ACABAMENTO E TESTES
+        Teste a paginação, os limites, os filtros, a ordenação e
+        situações em que nenhum produto seja encontrado.
+      */}
     </section>
   );
 }
